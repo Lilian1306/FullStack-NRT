@@ -1,13 +1,26 @@
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useActionData } from "react-router-dom";
 
-export async function action() {
-  console.log('Desde action')
+export async function action({request}) {
+
+  const data = Object.fromEntries(await request.formData())
+ 
+  let error = ''
+  if(Object.values(data).includes('')){
+    error = 'Todos los campos son obligatorios'
+  }
+  if(error.length){
+    return error
+  }
 
   return {}
 }
 
 
 export default function NewProduct() {
+
+  const error = useActionData()
+  console.log(error)
+
   return (
     <>
       <div className="flex justify-between">
@@ -27,10 +40,11 @@ export default function NewProduct() {
         <div className="mb-4">
           <label className="text-gray-800" htmlFor="name">Nombre Producto</label>
           <input
-             id="nma"
+             id="name"
              type="text"
              className="mt-2 block w-full p-3 bg-gray-50"
              placeholder="Nombre del Producto"
+             name='name'
           />
         </div>
         <div className="mt-4">
