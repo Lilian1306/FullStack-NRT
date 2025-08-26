@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import type { Product } from "../types"
 import { formatCurrency } from "../utils/inde"
 
@@ -6,6 +7,8 @@ type ProeductDetailsProps = {
 }
 
 export default function ProductDetails({product} : ProeductDetailsProps) {
+
+
 
   const isAvailability = product.availability
 
@@ -22,7 +25,10 @@ export default function ProductDetails({product} : ProeductDetailsProps) {
       </td>
       <td className="p-3 text-lg text-gray-500">
        <div className="flex gap-2 items-baseline-last">
-        <button>Editar</button>
+        <Link     
+           to={`productos/${product.id}/editar`}
+           className="bg-indigo-600 text-white rounded-lg w-full p-2 uppercase font-bold text-xs"
+        >Editar</Link>
        </div>
       </td>
     </tr>
