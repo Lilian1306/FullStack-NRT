@@ -26,12 +26,15 @@ export async function action({request, params} : ActionFunctionArgs) {
 
   if(params.id !== undefined) {
       await updateProduct(data, +params.id)
-
       return redirect('/')
 
   }
 }
 
+const availabilityOptions = [
+  {name: 'Disponible', value: true},
+  {name: 'No Disponible', value: true}
+]
 
 export default function EditProduct() {
 
@@ -77,6 +80,23 @@ export default function EditProduct() {
              name="price"
              defaultValue={product.price}
           />
+        </div>
+
+        <div className="mb-4">
+          <label
+             className="text-gray-800"
+             htmlFor="availability"
+          >Disponibilidad</label>
+          <select
+             id="availability"
+             className="mt-2 block w-full p-3 bg-gray-50"
+             name="availability"
+             defaultValue={product?.availability.toString()}
+          >
+            {availabilityOptions.map(option => (
+              <option key={option.name} value={option.value.toString()}>{option.name}</option>
+            ))}
+          </select>
         </div>
         <input
           type="submit"
