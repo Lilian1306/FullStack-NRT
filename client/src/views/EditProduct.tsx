@@ -1,6 +1,6 @@
 import { Form, Link, useActionData, redirect, type ActionFunctionArgs, type LoaderFunctionArgs, useLoaderData} from "react-router-dom";
 import ErrorMessage from "../components/ErrorMessage";
-import { addProduct, getProductById } from "../services/ProductService";
+import { getProductById, updateProduct } from "../services/ProductService";
 import type { Product } from "../types";
 
 export async function loader({params}: LoaderFunctionArgs) {
@@ -13,10 +13,9 @@ export async function loader({params}: LoaderFunctionArgs) {
   }
 }
 
-export async function action({request} : ActionFunctionArgs) {
+export async function action({request, params} : ActionFunctionArgs) {
 
   const data = Object.fromEntries(await request.formData())
- 
   let error = ''
   if(Object.values(data).includes('')){
     error = 'Todos los campos son obligatorios'
@@ -25,9 +24,12 @@ export async function action({request} : ActionFunctionArgs) {
     return error
   }
 
-  await addProduct(data)
+  if(params.id !== undefined) {
+      await updateProduct(data, +params.id)
 
-  return redirect('/')
+      return redirect('/')
+
+  }
 }
 
 
