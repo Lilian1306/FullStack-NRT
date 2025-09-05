@@ -33,7 +33,7 @@ export async function action({request, params} : ActionFunctionArgs) {
 
 const availabilityOptions = [
   {name: 'Disponible', value: true},
-  {name: 'No Disponible', value: true}
+  {name: 'No Disponible', value: false}
 ]
 
 export default function EditProduct() {
