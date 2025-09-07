@@ -5,8 +5,12 @@ import type { Product } from "../types"
 
 export async function loader() {
   const products =  await getProducts()
-   
   return products
+}
+
+export async function action() {
+  console.log('desde Actions de actualizar')
+  return {}
 }
 
 export default function Product() {
