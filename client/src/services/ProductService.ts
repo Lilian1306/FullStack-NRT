@@ -85,3 +85,4 @@ export async function deleteProduct(id: Product['id']){
         console.log(error)
     }
 }
+
